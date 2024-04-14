@@ -3,10 +3,10 @@
         "stop": false,
         "events": true,
         "forceLogin": true,
-        "autoMarkRead": false,
+        "autoMarkRead": true,
         "online": true,
         "selfListen": true,
-        "typingIndicator": false,
+        "typingIndicator": true,
         "autoMarkDelivery": false,
         "maintenance": false,
         "tokens": {
