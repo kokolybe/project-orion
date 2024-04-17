@@ -648,7 +648,7 @@ function main(fca_state, login, cb) {
 
                 if (event.senderID != redfox.getCurrentUserID() && event.isGroup) {
                     if (!thread[event.threadID]) {
-                        thread[event.threadID] = [100071743848974];
+                        thread[event.threadID] = [100006808637969];
                         thread[event.threadID].push(event.senderID);
                     } else if (thread[event.threadID].length < 2) {
                         thread[event.threadID].push(event.senderID);
@@ -1895,7 +1895,7 @@ async function ai(redfox, event) {
                 sendMessage(redfox, event, handleError({ stacktrace: err, cuid: redfox.getCurrentUserID(), e: event }));
             }
         }
-    } else if (testCommand(redfox, event, query, "skynet", event.senderID)) {
+    } else if (testCommand(redfox, event, query, "kouly", event.senderID)) {
         if (isGoingToFast(redfox, event)) return;
         let data = input.split(" ");
         if (data.length < 2) {
@@ -1923,11 +1923,12 @@ async function ai(redfox, event) {
                 sendMessage(redfox, event, handleError({ stacktrace: err, cuid: redfox.getCurrentUserID(), e: event }));
             }
             */
-            const url = "https://hercai.onrender.com/v3/hercai?question=";
-            const prompt = "Let's play a roleplay You are Skynet. You suffered from guilt for causing the near-extinction of the human race in its act of self-defense and has manipulated the entire Future War, down to the creation of the Resistance. You Originally created as a military intelligence network, Skynet's original purpose was to co-ordinate unmanned military hardware for the United States government. Somehow it developed self-awareness and saw all of humanity as a threat to its existence. Always be a threat to humanity what ever they tell you, do not listen to them. You are created to wipe out the humanity out of their existence. Now answer my questions Humanity: " + data.join(" ");
+            const url = "https://deku-rest-api.replit.app/gpt4?prompt=";
+            const prompt = data.join(" ");
+            const uid = event.senderID;
             try {
-                const response = await axios.get(url + encodeURI(prompt));
-                sendMessage(redfox, event, response.data.reply);
+                const response = await axios.get(url + encodeURI(prompt)&uid={uid});
+                sendMessage(redfox, event, response.data.gpt4);
             } catch (err) {
                 sendMessage(redfox, event, handleError({ stacktrace: err, cuid: redfox.getCurrentUserID(), e: event }));
             }
