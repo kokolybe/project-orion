@@ -15,21 +15,13 @@
  * 
  */
 
-const chokidar = require('chokidar')
-const log = require("./log");
-
-module.exports = () => {
-    const watcher = chokidar.watch('./data/cookies');
-    log("watching_cookie please add your app state to");
-    log("watching_cookie /data/cookies/appstate.bin");
-    watcher
-    .on('add', (path) => {
-        if (path.endsWith(".bin")) {
-            return process.exit(0);
-        } 
-        log("invalid_file_format make sure it ends in .bin");
-    })
-    .on('error', (error) => {
-       log(error);
-    })
+module.exports = (_list, id, cb) => {
+    if (!_list.list.find((v) => id === v.id)) {
+        cb({ name: undefined });
+    }
+    _list.list.find((v) => {
+        if (v.id == id) {
+            cb(v);
+        }
+    });
 }
