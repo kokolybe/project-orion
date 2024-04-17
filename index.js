@@ -1927,7 +1927,7 @@ async function ai(redfox, event) {
             const prompt = data.join(" ");
             const uid = event.senderID;
             try {
-                const response = await axios.get(url + encodeURI(prompt)&uid={uid});
+                const response = await axios.get(`${url}${encodeURI(prompt)}&uid=${uid}`);
                 sendMessage(redfox, event, response.data.gpt4);
             } catch (err) {
                 sendMessage(redfox, event, handleError({ stacktrace: err, cuid: redfox.getCurrentUserID(), e: event }));
