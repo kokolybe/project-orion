@@ -1,4 +1,6 @@
-var utils = require("../utils");
+const path = require("path");
+var utils = require(path.join(__dirname, '..', 'utils'));
+var ex_utils = require("../../utils");
 
 module.exports = function (defaultFuncs, api, ctx) {
     return function logout(callback) {
@@ -51,7 +53,7 @@ module.exports = function (defaultFuncs, api, ctx) {
             })
             .then(function () {
                 ctx.loggedIn = false;
-                utils.logged("fca_logout Logged out successfully.");
+                ex_utils.log("fca_logout Logged out successfully.");
                 callback();
             })
             .catch(function (err) {

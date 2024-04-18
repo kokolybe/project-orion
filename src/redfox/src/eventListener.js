@@ -12,7 +12,9 @@
  * Copyright (c) 2022 Melvin Jones
  */
 
-var utils = require("../utils");
+const ex_utils = require("../../utils");
+const path = require("path");
+var utils = require(path.join(__dirname, '..', 'utils'));
 var mqtt = require("mqtt");
 var websocket = require("websocket-stream");
 var HttpsProxyAgent = require("https-proxy-agent");
@@ -45,38 +47,6 @@ var topics = [
     //"/pp",
     //"/webrtc_response",
 ];
-
-function logged(data) {
-    if (typeof data === "string") {
-        let d = data.normalize("NFKC").split(" ");
-        if (d[0].includes("_")) {
-            let db = d[0];
-            let db1 = d[1];
-            d.shift();
-            if (db1.length > 14 && /^\d+$/.test(parseInt(db1))) {
-                d.shift();
-                console.log("\x1b[36m", getCurrentTime(), "\x1b[0m", "|", "\x1b[40m", db, "\x1b[0m", "\x1b[34m", db1, "\x1b[0m", d.join(" "));
-            } else {
-                console.log("\x1b[36m", getCurrentTime(), "\x1b[0m", "|", "\x1b[40m", db, "\x1b[0m", d.join(" "));
-            }
-        } else {
-            console.log("\x1b[36m", getCurrentTime(), "\x1b[0m", "|", d.join(" "));
-        }
-    } else {
-        let da = JSON.stringify(data);
-        if (da == "") {
-            return;
-        }
-        console.log("\x1b[36m", getCurrentTime(), "\x1b[0m", " |", da.normalize("NFKC"));
-    }
-}
-
-function getCurrentTime() {
-    let today = new Date();
-    let hour = today.getHours();
-    let suffix = hour >= 12 ? "PM" : "AM";
-    return (hour = ((hour + 11) % 12) + 1 + ":" + today.getMinutes() + ":" + today.getSeconds() + " " + suffix);
-}
 
 function eventListener(defaultFuncs, api, ctx, globalCallback) {
     //Don't really know what this does but I think it's for the active state?
@@ -192,7 +162,7 @@ function eventListener(defaultFuncs, api, ctx, globalCallback) {
         try {
             var jsonMessage = JSON.parse(message);
         } catch (ex) {
-            return utils.logged("fca_listen_mqtt " + ex);
+            return ex_utils.log("fca_listen_mqtt " + ex);
         }
         if (topic === "/t_ms") {
             if (ctx.tmsWait && typeof ctx.tmsWait == "function") {
@@ -251,10 +221,10 @@ function eventListener(defaultFuncs, api, ctx, globalCallback) {
 function disconnect(mqttClient, err) {
     mqttClient.end();
     if (err) {
-        utils.logged("fca_listen_mqtt " + err);
+        ex_utils.log("fca_listen_mqtt " + err);
         getSeqID();
     } else {
-        utils.logged("fca_mqtt_client connection closed restarting now...");
+        ex_utils.log("fca_mqtt_client connection closed restarting now...");
     }
     process.exit(0);
 }
@@ -465,7 +435,7 @@ function parseDelta(defaultFuncs, api, ctx, globalCallback, v) {
                                 };
                             })
                             .catch((err) => {
-                                logged("forced_fetch " + err);
+                                ex_utils.log("forced_fetch " + err);
                             })
                             .finally(function () {
                                 if (ctx.globalOptions.autoMarkDelivery) {
@@ -554,7 +524,7 @@ function parseDelta(defaultFuncs, api, ctx, globalCallback, v) {
                         if (utils.getType(fetchData) == "Object") {
                             switch (fetchData.__typename) {
                                 default:
-                                    utils.logged("unsupported_fca_fetch_data " + fetchData.__typename);
+                                    ex_utils.log("unsupported_fca_fetch_data " + fetchData.__typename);
                                     break;
                                 case "ThreadImageMessage":
                                     (!ctx.globalOptions.selfListen && fetchData.message_sender.id.toString() === ctx.userID) || !ctx.loggedIn
@@ -610,7 +580,7 @@ function parseDelta(defaultFuncs, api, ctx, globalCallback, v) {
                         }
                     })
                     .catch((err) => {
-                        logged("forced_fetch " + err);
+                        ex_utils.log("forced_fetch " + err);
                     });
             }
             break;
@@ -640,12 +610,12 @@ function markDelivery(ctx, api, threadID, messageID) {
     if (threadID && messageID) {
         api.markAsDelivered(threadID, messageID, (err) => {
             if (err) {
-                utils.logged("fca_mark_delivered " + err);
+                ex_utils.log("fca_mark_delivered " + err);
             } else {
                 if (ctx.globalOptions.autoMarkRead) {
                     api.markAsRead(threadID, (err) => {
                         if (err) {
-                            utils.logged("fca_mark_delivered " + err);
+                            ex_utils.log("fca_mark_delivered " + err);
                         }
                     });
                 }
