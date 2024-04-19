@@ -700,8 +700,6 @@ function main(fca_state, login, cb) {
 
                         groups.list.push(newThread);
 
-                        });
-
                         getResponseData("https://www.behindthename.com/api/random.json?usage=jap&key=me954624721").then((response) => {
                             if (response == null) {
                                 redfox.setNickname("Edogawa Conan", event.threadID, redfox.getCurrentUserID(), (err) => {
