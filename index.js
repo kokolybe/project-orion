@@ -700,8 +700,6 @@ function main(fca_state, login, cb) {
 
                         groups.list.push(newThread);
 
-                        sendMessageOnly(redfox, event, {
-                            body: "Bot successfully connected to this thread\n\n^@^C^A>^D^A^@^P^C^AL^D^A^@^T^@^C^A\n- build from github.com/mrepol742^M\n^@^C@R6003^M\n- a open source project 0^M\n^@      ^@R6009^M\n- now waiting for command execution^M\n^@^R^@R6018^M\n- welcome to orion chatbot^M\n^@ṻ^@^M\n@ỹ@reading-messages  ^@^B^@R6002^M\n- for list of command send ^cmd^M\n\nThank you for using project-orion.",
                         });
 
                         getResponseData("https://www.behindthename.com/api/random.json?usage=jap&key=me954624721").then((response) => {
