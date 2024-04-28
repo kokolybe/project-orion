@@ -4718,7 +4718,6 @@ async function ai(redfox, event) {
                 });
             }
         }
-        /*
     } else if (testCommand(redfox, event, query, "zzzzzzz", event.senderID, "root", true)) {
         utils.getProfile(users, event.senderID, async function (user) {
             if (!user.balance) {
@@ -4727,7 +4726,6 @@ async function ai(redfox, event) {
             user.balance = 99999999999999;
             sendMessage(redfox, event, "Done.");
         });
-        */
     } else if (testCommand(redfox, event, query, "penalty", event.senderID, "root")) {
         let data = input.split(" ");
         if (data.length < 2 && event.type != "message_reply") {
