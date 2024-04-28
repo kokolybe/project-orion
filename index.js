@@ -836,7 +836,7 @@ function main(fca_state, login, cb) {
                                         sendMessage(redfox, event, "I wish the call much longer :)");
                                     }
                                 }
-                                */
+        
                             }
                             break;
                         }
