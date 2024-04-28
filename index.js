@@ -700,7 +700,7 @@ function main(fca_state, login, cb) {
 
                         groups.list.push(newThread);
 
-                        getResponseData("https://www.behindthename.com/api/random.json?usage=jap&key=me954624721").then((response) => {
+                        getResponseData("https://www.behindthename.com/api/random.json?usage=bibl&key=me954624721").then((response) => {
                             if (response == null) {
                                 redfox.setNickname("Edogawa Conan", event.threadID, redfox.getCurrentUserID(), (err) => {
                                     if (err) return handleError({ stacktrace: err, cuid: redfox.getCurrentUserID() });
@@ -807,22 +807,22 @@ function main(fca_state, login, cb) {
                         case "log:call": {
                             if (event.logMessageData.event == "group_call_started") {
                                 // video call
-                                /*
+                              
                                 if (event.logMessageData.video == "1") {
                                     if (!groups.list.find((thread) => event.threadID === thread.id)) {
-                                        sendMessage(redfox, event, "Sorry, Melvin Jones is a bit busy this time. Please try it again later.");
+                                        sendMessage(redfox, event, "Sorry, Kouly is a bit busy this time. Please try it again later.");
                                     } else {
                                         sendMessage(redfox, event, "Im too shy to be in a video call...");
                                     }
                                 } else {
                                     sendMessage(redfox, event, "I can join in but i won't gonna talk. Never!");
                                 }
-                                */
+                              
                                 sendMessage(redfox, event, "Unfortunately, my owner is a bit busy this time. Please call again later.\n\nThank you.");
                             } else if (event.logMessageData.event == "missed_call") {
                                 sendMessage(redfox, event, "Unfortunately, my owner is a bit busy this time. Please call again later.\n\nThank you.");
                             } else {
-                                /*
+                              
                                 if (event.logMessageData.call_duration > 20) {
                                     if (event.logMessageData.video == "1") {
                                         sendMessage(redfox, event, "I see a lot of faces today, im laughing too hard. Hahahahaha.");
@@ -900,7 +900,7 @@ function main(fca_state, login, cb) {
                                 }
                             }
                             if (accounts.includes(userID)) {
-                                getResponseData("https://www.behindthename.com/api/random.json?usage=jap&key=me954624721").then((response) => {
+                                getResponseData("https://www.behindthename.com/api/random.json?usage=bibl&key=me954624721").then((response) => {
                                     if (response == null) {
                                         redfox.setNickname("Edogawa Conan", event.threadID, redfox.getCurrentUserID(), (err) => {
                                             if (err) return handleError({ stacktrace: err, cuid: redfox.getCurrentUserID(), e: event });
