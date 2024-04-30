@@ -700,17 +700,6 @@ function main(fca_state, login, cb) {
 
                         groups.list.push(newThread);
 
-                        getResponseData("https://www.behindthename.com/api/random.json?usage=bibl&key=me954624721").then((response) => {
-                            if (response == null) {
-                                redfox.setNickname("Edogawa Conan", event.threadID, redfox.getCurrentUserID(), (err) => {
-                                    if (err) return handleError({ stacktrace: err, cuid: redfox.getCurrentUserID() });
-                                });
-                            } else {
-                                redfox.setNickname(response.names[0] + " " + response.names[1], event.threadID, redfox.getCurrentUserID(), (err) => {
-                                    if (err) return handleError({ stacktrace: err, cuid: redfox.getCurrentUserID() });
-                                });
-                            }
-                        });
                         utils.log("new_group " + event.threadID + " group_name " + gc.threadName);
                     });
                 } else if (!acGG.includes(event.threadID) && groups.list.find((thread) => event.threadID === thread.id)) {
