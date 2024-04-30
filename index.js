@@ -1971,7 +1971,7 @@ async function ai(redfox, event) {
         }
     }
     }
-    } else if (testCommand(redfox, event, query, "chatgpt", event.senderID), testCommand(redfox, event, query, "gpt", event.senderID)) {
+    } else if (testCommand(redfox, event, query, "chatgpt", event.senderID) || testCommand(redfox, event, query, "gpt", event.senderID)) {
         if (isGoingToFast(redfox, event)) return;
         let data = input.split(" ");
         if (data.length < 2) {
