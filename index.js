@@ -1943,34 +1943,7 @@ async function ai(redfox, event) {
             } catch (err) {
                 sendMessage(redfox, event, handleError({ stacktrace: err, cuid: redfox.getCurrentUserID(), e: event }));
             }
-        }
-    } else if (testCommand(redfox, event, query, "gemini", event.senderID)) {
-    if (isGoingToFast(redfox, event)) return;
-    let data = input.split(" ");
-    if (data.length < 2) {
-        sendMessage(redfox, event, hey[Math.floor(Math.random() * hey.length)]);
-    } else {
-        const url = "https://deku-rest-api.replit.app";
-        const prompt = data.join(" ");
-        const uid = event.senderID;
-        try {
-            if (event.type === "message_reply") {
-                if (event.messageReply.attachments[0]?.type === "photo") {
-                    const photoUrl = encodeURIComponent(event.messageReply.attachments[0].url);
-                    const res = await axios.get(`${url}/gemini?prompt=${encodeURIComponent(prompt)}&url=${photoUrl}&uid=${uid}`);
-                    sendMessage(redfox, event, res.data.gemini);
-                } else {
-                    sendMessage(redfox, event, "Please reply to an image.");
-                }
-            } else {
-                const res = await axios.get(`${url}/gemini?prompt=${encodeURIComponent(prompt)}&uid=${uid}`);
-                sendMessage(redfox, event, res.data.gemini);
-            }
-        } catch (err) {
-            sendMessage(redfox, event, handleError({ stacktrace: err, cuid: redfox.getCurrentUserID(), e: event }));
-        }
-    }
-    }
+        } 
     } else if (testCommand(redfox, event, query, "chatgpt", event.senderID) || testCommand(redfox, event, query, "gpt", event.senderID)) {
         if (isGoingToFast(redfox, event)) return;
         let data = input.split(" ");
