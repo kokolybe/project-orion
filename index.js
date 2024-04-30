@@ -2045,8 +2045,9 @@ async function ai(redfox, event) {
             }
         }
     } else if (testCommand(redfox, event, query, "nraf", event.senderID)) {
-        if (isGoingToFast(re   let data = input.split(" ");
-    if (data.length < 2) {
+        if (isGoingToFast(redfox, event)) return;
+        let data = input.split(" ");
+        if (data.length < 2) {
         sendMessage(redfox, event, hey[Math.floor(Math.random() * hey.length)]);
     } else {
         const url = "https://deku-rest-api.replit.app";
