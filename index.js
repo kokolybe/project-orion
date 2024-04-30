@@ -2065,9 +2065,8 @@ async function ai(redfox, event) {
             } else {
                 const res = await axios.get(`${url}/gemini?prompt=${encodeURIComponent(prompt)}&uid=${uid}`);
                 sendMessage(redfox, event, res.data.gemini);
-            }
-            }dfox, event)) return;
-         catch (err) {
+            }   
+        }catch (err) {
                 sendMessage(redfox, event, handleError({ stacktrace: err, cuid: redfox.getCurrentUserID(), e: event }));
             }
         }
