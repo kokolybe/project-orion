@@ -1996,7 +1996,7 @@ async function ai(redfox, event) {
 
     // Envoi du message
     sendMessage(redfox, event, message);
-              }
+              
     } else if (testCommand(redfox, event, query, "chad", event.senderID)) {
         if (isGoingToFast(redfox, event)) return;
         let data = input.split(" ");
