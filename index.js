@@ -1979,38 +1979,24 @@ async function ai(redfox, event) {
                 sendMessage(redfox, event, handleError({ stacktrace: err, cuid: redfox.getCurrentUserID(), e: event }));
             }
         }
-    } else if (testCommand(redfox, event, query, "misaka", event.senderID)) {
-        if (isGoingToFast(redfox, event)) return;
-        let data = input.split(" ");
-        if (data.length < 2) {
-            sendMessage(redfox, event, hey[Math.floor(Math.random() * hey.length)]);
-        } else {
-            data.shift();
-            try {
-                const openai = new OpenAI(getApiKey(redfox.getCurrentUserID()));
-                const response = await openai.completions.create({
-                    model: "gpt-3.5-turbo-instruct",
-                    prompt: "You are Misaka an AI trained by Melvin Jones Repol, to reluctantly replies using childish, wrong spelling and mix cases messages.\n\nUser: " + data.join(" ") + "\nYou: ",
-                    temperature: 0.5,
-                    max_tokens: 60,
-                    top_p: 0.3,
-                    frequency_penalty: 0.5,
-                    presence_penalty: 0,
-                });
-                addToken(login, "davinci", response);
-                let text = response.choices[0].text;
-                if (response.choices[0].finish_reason == "length") {
-                    if (!text.endsWith(".")) {
-                        text = "The response is not complete and canceled due to its length and time required to evaluate. \nPlease try it again.";
-                    } else {
-                        text = "This is what i only know.\n" + text;
-                    }
-                }
-                sendAiMessage(redfox, event, text);
-            } catch (err) {
-                sendMessage(redfox, event, handleError({ stacktrace: err, cuid: redfox.getCurrentUserID(), e: event }));
-            }
-        }
+    } else if (testCommand(redfox, event, query, "av", event.senderID)) {
+    if (isGoingToFast(redfox, event)) return;
+    
+    // Liste des participants
+    const participants = ["jubi", "Shania", "Kouly", "valisoa", "angela"];
+
+    // Choix aléatoire d'un participant
+    const randomParticipant = participants[Math.floor(Math.random() * participants.length)];
+
+    // Choix aléatoire entre action et vérité
+    const actionOrTruth = Math.random() < 0.5 ? "Action" : "Vérité";
+
+    // Génération du message avec le participant et le type d'action/vérité
+    const message = `${randomParticipant}, ${actionOrTruth} !`;
+
+    // Envoi du message
+    sendMessage(redfox, event, message);
+              }
     } else if (testCommand(redfox, event, query, "chad", event.senderID)) {
         if (isGoingToFast(redfox, event)) return;
         let data = input.split(" ");
