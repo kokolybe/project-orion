@@ -1998,7 +1998,7 @@ async function ai(redfox, event) {
     sendMessage(redfox, event, message);
               
     }
-    else if (testCommand(redfox, event, query, "actionvérité", event.senderID)) {
+    else if (testCommand(redfox, event, query, "av2", event.senderID)) {
     if (isGoingToFast(redfox, event)) return;
 
     if (event.isGroup) {
