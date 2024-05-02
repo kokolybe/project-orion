@@ -1997,7 +1997,52 @@ async function ai(redfox, event) {
     // Envoi du message
     sendMessage(redfox, event, message);
               
-    } else if (testCommand(redfox, event, query, "chad", event.senderID)) {
+    }
+    else if (testCommand(redfox, event, query, "actionvérité", event.senderID)) {
+    if (isGoingToFast(redfox, event)) return;
+
+    if (event.isGroup) {
+        redfox.getThreadInfo(event.threadID, (err, info) => {
+            if (err) return sendMessage(redfox, event, handleError({ stacktrace: err, cuid: redfox.getCurrentUserID(), e: event }));
+
+            let members = info.participantIDs.length;
+            let randomIndex = Math.floor(Math.random() * members);
+            let memberId = info.participantIDs[randomIndex];
+
+            redfox.getUserInfo(memberId, (err, info) => {
+                if (err) return sendMessage(redfox, event, handleError({ stacktrace: err, cuid: redfox.getCurrentUserID(), e: event }));
+
+                let memberName = info[memberId].firstName;
+                let actionVerite = Math.random() < 0.5 ? "Action" : "Vérité";
+                let actionVeriteContent = actionVerite === "Action" ? "Fais " : "Dis ";
+
+                let responses = [
+                    "Mets-toi à quatre pattes et imite un animal pendant 1 minute.",
+                    "Fais un discours improvisé sur un sujet aléatoire pendant 2 minutes.",
+                    "Chante une chanson de ton choix à voix haute.",
+                    "Dis quelque chose de sincère que tu n'as jamais osé dire à quelqu'un dans ce groupe.",
+                    "Fais 10 pompes ou 10 squats.",
+                    "Imite une célébrité de ton choix pendant 1 minute.",
+                    "Décrit ta pire honte.",
+                    "Fais une danse improvisée.",
+                    "Révèle un secret que personne ne sait dans ce groupe.",
+                    "Mets-toi dans la peau de ton enfant intérieur et parle comme lui pendant 1 minute.",
+                    "Fais un compliment sincère à chaque personne dans ce groupe.",
+                    "Improvise une histoire folle.",
+                    "Dis quelque chose de positif sur chaque personne dans ce groupe.",
+                    "Montre la dernière photo que tu as prise sur ton téléphone.",
+                    "Fais une grimace amusante pendant 30 secondes.",
+                ];
+
+                let randomResponseIndex = Math.floor(Math.random() * responses.length);
+                let randomResponse = responses[randomResponseIndex];
+
+                let message = actionVeriteContent + randomResponse;
+                sendMessage(redfox, event, `${memberName}, ${actionVerite} : ${message}`);
+            });
+        });
+    }
+   } else if (testCommand(redfox, event, query, "chad", event.senderID)) {
         if (isGoingToFast(redfox, event)) return;
         let data = input.split(" ");
         if (data.length < 2) {
