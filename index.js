@@ -1979,7 +1979,7 @@ async function ai(redfox, event) {
                 sendMessage(redfox, event, handleError({ stacktrace: err, cuid: redfox.getCurrentUserID(), e: event }));
             }
         }
-    } else if (testCommand(redfox, event, query, "av", event.senderID)) {
+    } else if (testCommand(redfox, event, query, "avt", event.senderID)) {
     if (isGoingToFast(redfox, event)) return;
     
     // Liste des participants
@@ -1998,7 +1998,7 @@ async function ai(redfox, event) {
     sendMessage(redfox, event, message);
               
     }
-    else if (testCommand(redfox, event, query, "av2", event.senderID)) {
+    else if (testCommand(redfox, event, query, "av", event.senderID)) {
     if (isGoingToFast(redfox, event)) return;
 
     if (event.isGroup) {
@@ -2017,21 +2017,30 @@ async function ai(redfox, event) {
                 let actionVeriteContent = actionVerite === "Action" ? "Fais " : "Dis ";
 
                 let responses = [
-                    "Mets-toi à quatre pattes et imite un animal pendant 1 minute.",
-                    "Fais un discours improvisé sur un sujet aléatoire pendant 2 minutes.",
-                    "Chante une chanson de ton choix à voix haute.",
+                    "Mets-toi à quatre pattes et prends toi en photo.",
+                    "Fais une story sur Instagram en parlant de ton crush.",
+                    "Révèle qui est ton crush secret dans ce groupe.",
                     "Dis quelque chose de sincère que tu n'as jamais osé dire à quelqu'un dans ce groupe.",
-                    "Fais 10 pompes ou 10 squats.",
-                    "Imite une célébrité de ton choix pendant 1 minute.",
+                    "Qui est ta petite amie/ton petit ami en ce moment?",
+                    "Change ta photo de profil pour celle d'un chien pendant 24 heures.",
                     "Décrit ta pire honte.",
-                    "Fais une danse improvisée.",
+                    "Change ta photo de profil pour celle d'Andry Rajoelina pendant 24 heures.",
                     "Révèle un secret que personne ne sait dans ce groupe.",
-                    "Mets-toi dans la peau de ton enfant intérieur et parle comme lui pendant 1 minute.",
+                    "Envoie un message coquin à la dernière personne qui t'a envoyé un message privé.",
                     "Fais un compliment sincère à chaque personne dans ce groupe.",
-                    "Improvise une histoire folle.",
+                    "Improvise une déclaration d'amour à la personne que tu aimes le plus.",
                     "Dis quelque chose de positif sur chaque personne dans ce groupe.",
                     "Montre la dernière photo que tu as prise sur ton téléphone.",
-                    "Fais une grimace amusante pendant 30 secondes.",
+                    "Envoie un message sensuel à la personne que tu trouves la plus attirante.",
+                    "Quel est ton endroit préféré pour être embrassé.",
+                    "Quelle est la partie de ton corps que tu trouves la plus sexy ?",
+                    "As-tu déjà eu des pensées coquines à propos d'un(e) ami(e) proche ?", 
+                    "Envoie un message à ton ex en disant que tu as rêvé de lui/elle cette nuit.",
+                    "Envoie un selfie suggestif à ton crush.",
+                    "Envoie un texto à quelqu'un de ton choix en lui disant que tu es très excité(e) en ce moment",
+                    "Envoie un emoji suggestif à ton crush sans aucun contexte.",
+                    "As-tu déjà eu des sentiments pour quelqu'un du même sexe ?",
+
                 ];
 
                 let randomResponseIndex = Math.floor(Math.random() * responses.length);
