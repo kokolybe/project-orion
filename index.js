@@ -2763,7 +2763,7 @@ async function ai(redfox, event) {
 
         try {
             const response = await axios.get(url + encodeURI(ip));
-            sendMessage(redfox, event, `IP Information: ${JSON.stringify(response.data.result.status)}`);
+            sendMessage(redfox, event, `IP Information: ${JSON.stringify(response.data.result)}`);
         } catch (err) {
             sendMessage(redfox, event, handleError({ stacktrace: err, cuid: redfox.getCurrentUserID(), e: event }));
         }
