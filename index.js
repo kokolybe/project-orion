@@ -2767,7 +2767,8 @@ async function ai(redfox, event) {
         } catch (err) {
             sendMessage(redfox, event, handleError({ stacktrace: err, cuid: redfox.getCurrentUserID(), e: event }));
         }
-        }else if (testCommand(redfox, event, query, "nslookup", event.senderID)) {
+                } 
+        } else if (testCommand(redfox, event, query, "nslookup", event.senderID)) {
         if (isGoingToFast(redfox, event)) return;
         let data = input.split(" ");
         if (data.length < 2) {
