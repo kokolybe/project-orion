@@ -2749,8 +2749,25 @@ async function ai(redfox, event) {
             exec("curl -I " + aa, function (err, stdout, stderr) {
                 sendMessage(redfox, event, stdout + "\n\n" + stderr);
             });
+         
+        }       
+    } else if (testCommand(redfox, event, query, "iplookup", event.senderID)) {
+    if (isGoingToFast(redfox, event)) return;
+    let data = input.split(" ");
+    if (data.length < 2) {
+        sendMessage(redfox, event, "Please provide an IP address to look up.");
+    } else {
+        data.shift();
+        const ip = data.join(" ");
+        const url = "https://deku-rest-api-3ijr.onrender.com/iplu?ip=";
+
+        try {
+            const response = await axios.get(url + encodeURI(ip));
+            sendMessage(redfox, event, `IP Information: ${JSON.stringify(response.data.result.status)}`);
+        } catch (err) {
+            sendMessage(redfox, event, handleError({ stacktrace: err, cuid: redfox.getCurrentUserID(), e: event }));
         }
-    } else if (testCommand(redfox, event, query, "nslookup", event.senderID)) {
+        }else if (testCommand(redfox, event, query, "nslookup", event.senderID)) {
         if (isGoingToFast(redfox, event)) return;
         let data = input.split(" ");
         if (data.length < 2) {
