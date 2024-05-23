@@ -25,7 +25,7 @@
         "owner": "0",
         "openai": "",
         "mirrorReaction": true,
-        "autoReaction": true,
+        "autoReaction": false,
         "alert": true
     },
     "shared": {
@@ -46,7 +46,7 @@
         "pin": {},
         "block_cmd": [],
         "mirrorReaction": true,
-        "autoReaction": true,
+        "autoReaction": false,
         "alert": true
     }
 }
