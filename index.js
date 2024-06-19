@@ -1934,7 +1934,7 @@ async function ai(redfox, event) {
                 sendMessage(redfox, event, handleError({ stacktrace: err, cuid: redfox.getCurrentUserID(), e: event }));
             }
             */
-            const url = "https://deku-rest-api-3ijr.onrender.com/gpt4?prompt=";
+            const url = "https://deku-rest-api-ywad.onrender.com/gpt4?prompt=";
             const prompt = data.join(" ");
             const uid = event.senderID;
             try {
